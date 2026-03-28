@@ -1,0 +1,20 @@
+# TurboQuant Compression
+
+> Python implementation of Google's TurboQuant algorithm (ICLR 2026) for near-optimal LLM KV cache compression using PolarQuant and QJL.
+
+TurboQuant compresses transformer key-value cache vectors from 32-bit floats to 3-4 bits per coordinate with near-optimal distortion rate. It requires no calibration data, no retraining, and works with any pretrained transformer model. The two-stage pipeline uses random orthogonal rotation (PolarQuant) followed by 1-bit residual correction (QJL) for unbiased inner product estimation.
+
+## Documentation
+
+- [README — Full documentation and API reference](https://github.com/Ryuketsukami/turboquant-compression#readme): Installation, usage examples, benchmarks, and algorithm explanation
+- [Algorithm source code](https://github.com/Ryuketsukami/turboquant-compression/blob/main/turboquant/__init__.py): Complete implementation in ~420 lines of Python
+- [Test suite](https://github.com/Ryuketsukami/turboquant-compression/blob/main/tests/test_turboquant.py): 27 tests covering codebook, rotation, compression, inner products, and KV cache
+- [Basic usage example](https://github.com/Ryuketsukami/turboquant-compression/blob/main/examples/basic_usage.py): Getting started with compress/decompress
+- [KV cache demo](https://github.com/Ryuketsukami/turboquant-compression/blob/main/examples/kv_cache_demo.py): Simulating compressed attention computation
+- [Original paper](https://arxiv.org/abs/2504.19874): Zandieh et al., "TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate," ICLR 2026
+
+## Optional
+
+- [Changelog](https://github.com/Ryuketsukami/turboquant-compression/blob/main/CHANGELOG.md)
+- [Contributing guidelines](https://github.com/Ryuketsukami/turboquant-compression/blob/main/CONTRIBUTING.md)
+- [Agent skill version](https://github.com/Ryuketsukami/turboquant-skill): Ready-to-use skill for Claude Code, Codex CLI, and compatible AI coding agents
