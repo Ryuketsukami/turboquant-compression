@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "turboquant-compression"
+version = "0.1.0"
+description = "Near-optimal vector quantization for LLM KV cache compression — PolarQuant + QJL from the TurboQuant paper (ICLR 2026)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "ryuketsukami", email = "ryuketsukami@gmail.com"}
+]
+keywords = [
+    "turboquant",
+    "quantization",
+    "vector-quantization",
+    "kv-cache",
+    "kv-cache-compression",
+    "llm",
+    "llm-compression",
+    "llm-inference",
+    "model-compression",
+    "neural-network-compression",
+    "post-training-quantization",
+    "lloyd-max",
+    "polarquant",
+    "qjl",
+    "attention",
+    "transformer",
+    "inference-optimization",
+    "memory-optimization",
+    "low-bit-quantization",
+    "deep-learning",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/ryuketsukami/turboquant-compression"
+Repository = "https://github.com/ryuketsukami/turboquant-compression"
+Issues = "https://github.com/ryuketsukami/turboquant-compression/issues"
+Documentation = "https://github.com/ryuketsukami/turboquant-compression#readme"
+
+[tool.setuptools]
+py-modules = ["turboquant"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
