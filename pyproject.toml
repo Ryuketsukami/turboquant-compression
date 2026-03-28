@@ -61,7 +61,19 @@ Issues = "https://github.com/ryuketsukami/turboquant-compression/issues"
 Documentation = "https://github.com/ryuketsukami/turboquant-compression#readme"
 
 [tool.setuptools]
-py-modules = ["turboquant"]
+packages = ["turboquant"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true

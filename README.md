@@ -2,6 +2,7 @@
   <img src="https://img.shields.io/badge/TurboQuant-ICLR%202026-blueviolet?style=for-the-badge" alt="ICLR 2026" />
   <img src="https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License" />
+  <a href="https://github.com/Ryuketsukami/turboquant-compression/actions/workflows/tests.yml"><img src="https://github.com/Ryuketsukami/turboquant-compression/actions/workflows/tests.yml/badge.svg" alt="Tests" /></a>
 </p>
 
 <h1 align="center">TurboQuant</h1>
@@ -149,21 +150,30 @@ print(f"True: {true_ip:.4f}, Estimated: {estimated_ip:.4f}")
 
 ## Benchmarks
 
-Results on random unit vectors (d=256, n=64):
+Results on random unit vectors (d=256, n=64, seed=0). Measured on Python 3.14, Windows 11.
 
 | Bits | Variant | MSE | Cosine Sim | IP Correlation | Compression |
 |------|---------|-----|------------|----------------|-------------|
-| **2** | MSE | ~0.0058 | ~0.9971 | — | **16.0x** |
-| **2** | Prod (+QJL) | — | — | ~0.9943 | 10.7x |
-| **3** | MSE | ~0.0014 | ~0.9993 | — | **10.7x** |
-| **3** | Prod (+QJL) | — | — | ~0.9987 | 8.0x |
-| **4** | MSE | ~0.0003 | ~0.9999 | — | **8.0x** |
-| **4** | Prod (+QJL) | — | — | ~0.9997 | 6.4x |
+| **2** | MSE | 0.000461 | 0.9394 | — | **16.0x** |
+| **2** | Prod (+QJL) | — | — | 0.8402 | 10.7x |
+| **3** | MSE | 0.000133 | 0.9829 | — | **10.7x** |
+| **3** | Prod (+QJL) | — | — | 0.8605 | 8.0x |
+| **4** | MSE | 0.000037 | 0.9952 | — | **8.0x** |
+| **4** | Prod (+QJL) | — | — | 0.8604 | 6.4x |
 
-Run the self-test to see exact numbers on your hardware:
+> **Note:** These are results for d=256. The paper reports near-zero accuracy loss at production dimensions (d=4096+), where the Beta distribution concentrates more tightly and quantization error drops significantly.
+
+Run the self-test to reproduce these numbers:
 
 ```bash
-python turboquant.py
+python -m turboquant           # as installed package
+python turboquant/turboquant.py  # directly
+```
+
+Run the test suite:
+
+```bash
+pytest tests/ -v               # 27 tests
 ```
 
 ## API Reference
@@ -199,12 +209,17 @@ python turboquant.py
 
 ```
 turboquant-compression/
-├── turboquant.py           # Core implementation
+├── turboquant/             # Package
+│   ├── __init__.py         # Core implementation + public API
+│   └── __main__.py         # python -m turboquant entry point
+├── turboquant.py           # Standalone script (self-test + demo)
 ├── tests/
-│   └── test_turboquant.py  # Test suite
+│   └── test_turboquant.py  # 27 tests (pytest)
 ├── examples/
 │   ├── basic_usage.py      # Getting started example
 │   └── kv_cache_demo.py    # KV cache simulation
+├── .github/workflows/
+│   └── tests.yml           # CI — tests on Python 3.10-3.13
 ├── pyproject.toml          # Package configuration
 ├── requirements.txt        # Dependencies
 ├── LICENSE                 # MIT License
@@ -213,6 +228,8 @@ turboquant-compression/
 ├── CITATION.cff            # Citation metadata
 └── CHANGELOG.md            # Version history
 ```
+
+> **Looking for the agent skill version?** See [turboquant-skill](https://github.com/Ryuketsukami/turboquant-skill) for a ready-to-use Claude Code / AI agent skill that wraps this implementation.
 
 ## Background: The TurboQuant Paper
 

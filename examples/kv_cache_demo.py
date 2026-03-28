@@ -6,10 +6,6 @@ Simulates compressing a transformer's KV cache using TurboQuant
 and measures attention score accuracy.
 """
 
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import numpy as np
 import time
 from turboquant import TurboQuantKVCache, TurboQuantConfig
